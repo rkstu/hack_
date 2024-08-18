@@ -1,0 +1,4 @@
+create_structure.py
+venv/
+flask_app/.env
+flask_app/app/__pycache__/
