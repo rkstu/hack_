@@ -1,4 +1,4 @@
-from transformers import BertTokenizer, BertForSequenceClassification, pipeline
+# from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import BaseChatPromptTemplate
@@ -12,24 +12,24 @@ import re
 
 queries_and_response = []
 
-def analyze_sentiment(sentences):
-    """
-    Analyzes the sentiment of a list of sentences using the FinBERT model.
+# def analyze_sentiment(sentences):
+#     """
+#     Analyzes the sentiment of a list of sentences using the FinBERT model.
 
-    :param sentences: A list of sentences to analyze.
-    :return: A list of dictionaries containing the sentiment analysis results for each sentence.
-    """
-    # Load the FinBERT model and tokenizer
-    finbert = BertForSequenceClassification.from_pretrained('yiyanghkust/finbert-tone', num_labels=3)
-    tokenizer = BertTokenizer.from_pretrained('yiyanghkust/finbert-tone')
+#     :param sentences: A list of sentences to analyze.
+#     :return: A list of dictionaries containing the sentiment analysis results for each sentence.
+#     """
+#     # Load the FinBERT model and tokenizer
+#     finbert = BertForSequenceClassification.from_pretrained('yiyanghkust/finbert-tone', num_labels=3)
+#     tokenizer = BertTokenizer.from_pretrained('yiyanghkust/finbert-tone')
 
-    # Create a sentiment analysis pipeline with the FinBERT model
-    nlp_pipeline = pipeline("sentiment-analysis", model=finbert, tokenizer=tokenizer)
+#     # Create a sentiment analysis pipeline with the FinBERT model
+#     nlp_pipeline = pipeline("sentiment-analysis", model=finbert, tokenizer=tokenizer)
 
-    # Analyze sentiment of the provided sentences
-    results = nlp_pipeline(sentences)
+#     # Analyze sentiment of the provided sentences
+#     results = nlp_pipeline(sentences)
 
-    return results
+#     return results
 
 from langchain_community.tools import DuckDuckGoSearchRun
 
@@ -148,9 +148,6 @@ Action: Search
 Action Input: What factors make an IPO favorable?
 Observation: Factors include...
 
-Action: Sentiment
-Action Input: Sentiment analysis on [specific IPO]
-Observation: The sentiment is...
 
 Thought: Now, is this my answer? Combine the findings.
 Final Answer: Based on the latest information, the most favorable upcoming IPOs are [IPO Names] due to factors such as [Factors]. Market sentiment suggests [Sentiment Analysis]. Sources: [source website Links]
@@ -189,11 +186,6 @@ tools = [
         name="Search",
         func=run_duckduckgo_search,
         description="Useful for when you need to answer questions about current events"
-    ),
-    Tool(
-        name="Sentiment",
-        func=analyze_sentiment,
-        description="Useful to determine the sentiment of a string"
     )
 ]
 

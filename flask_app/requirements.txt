@@ -7,5 +7,5 @@ langchain-community
 pymysql
 transformers
 python-dotenv
-pytorch
+# pytorch
 # flask-swagger-ui

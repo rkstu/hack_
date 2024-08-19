@@ -4,7 +4,7 @@ import random
 import string
 from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 from .config import Config
-from .utils import queries_and_response, analyze_sentiment
+from .utils import queries_and_response
 
 class TiDBDatabaseComponent:
     def __init__(self):
