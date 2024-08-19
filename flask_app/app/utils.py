@@ -109,13 +109,13 @@ class CustomPromptTemplate(BaseChatPromptTemplate):
         formatted = self.template.format(**kwargs)
         return [HumanMessage(content=formatted)]
 
+
 # Set up the template with history
 template_with_history = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
 ### Instruction:
 Answer the following questions as best you can. You have access to the following tools:
 
-Sentiment: useful to determine the sentiment of a string
 Search: to search stuff on the internet
 
 **Your goal is to break down the question into multiple logical parts and search for the latest information related to each part separately. If required, use different word
@@ -147,7 +147,6 @@ Observation: List of upcoming IPOs...
 Action: Search
 Action Input: What factors make an IPO favorable?
 Observation: Factors include...
-
 
 Thought: Now, is this my answer? Combine the findings.
 Final Answer: Based on the latest information, the most favorable upcoming IPOs are [IPO Names] due to factors such as [Factors]. Market sentiment suggests [Sentiment Analysis]. Sources: [source website Links]
@@ -225,7 +224,6 @@ def run_agent(prompt):
     return response
 
 
-queries_and_response = []
 def save_query_and_response(user_query: str):
   response = run_agent(user_query)
 #   print(response)
@@ -233,4 +231,6 @@ def save_query_and_response(user_query: str):
   return response
 
 
-
+def clear_queries():
+    global queries_and_response
+    queries_and_response = []
