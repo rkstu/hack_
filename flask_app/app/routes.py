@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, render_template, request
 from .models import TiDBDatabaseComponent
-# from .utils import analyze_sentiment, save_query_and_response
+from .utils import save_query_and_response
 
 api_bp = Blueprint('api_bp', __name__, template_folder='templates')
 
@@ -26,10 +26,9 @@ def add_user(email, password, first_name, last_name):
     user_id = db_component.add_user(email, password, first_name, last_name)
     return jsonify({"userId": user_id}), 201
 
-@api_bp.route('/add_queries/<userId>', methods=['POST'])
+@api_bp.route('/add_queries/<userId>', methods=['POST']) # NEED TO CHECK
 def add_queries(userId):
-    data = request.json
-    db_component.add_queries(userId, data['queries'])
+    db_component.add_queries(userId)
     return jsonify({"status": "success"}), 200
 
 @api_bp.route('/user_exists/<email>/<password>', methods=['GET'])
@@ -45,6 +44,11 @@ def get_user_queries(userId):
 @api_bp.route('/update_user_password/<userId>/<new_password>', methods=['POST'])
 def update_user_password(userId, new_password):
     db_component.update_user_password(userId, new_password)
+    return jsonify({"status": "success"}), 200
+
+@api_bp.route('/get_response/<userQuery>', methods=['GET'])
+def get_response(userQuery):
+    save_query_and_response(userQuery)
     return jsonify({"status": "success"}), 200
 
 # @api_bp.route('/sentiment', methods=['POST'])

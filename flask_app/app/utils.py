@@ -236,8 +236,9 @@ def run_agent(prompt):
 queries_and_response = []
 def save_query_and_response(user_query: str):
   response = run_agent(user_query)
-  print(response)
+#   print(response)
   queries_and_response.append({"response": response, "query": user_query})
+  return response
 
 
 
